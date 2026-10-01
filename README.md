@@ -1,39 +1,45 @@
 # ASIN-HHC Evidence OS Runtime v1
 
-Executable Evidence OS with:
+Executable Evidence OS with a built-in modern UI.
 
-- Strict state machine (UNVERIFIED → … → REPRODUCED → PROMOTED)
+## Features
+
+- Strict state machine: `UNVERIFIED → SYMBOLIC → SPECIFICATION → IMPLEMENTED → TESTED → OBSERVED → REPRODUCED → PROMOTED`
 - 10-stage intent pipeline
 - Deterministic replay (hash equivalence)
-- Independent reproduction check (different node_id required)
+- Independent reproduction (requires different `node_id`)
 - Sensory / financial metadata kept non-authoritative
+- Dark-themed SPA front-end for interactive use
 
-## Live Demo
+## Live UI
 
-After deploy the root `/` returns service info and `/docs` is the interactive OpenAPI UI.
+Once deployed, open the root URL:
 
-## Quick test
+- **/** — Interactive Evidence OS dashboard
+- **/docs** — OpenAPI / Swagger
+- **/api/v1/health** — Service status
+
+## Quick local run
 
 ```bash
-# Submit intent
-curl -X POST https://YOUR_DEPLOYMENT/api/v1/intent \
-  -H "Content-Type: application/json" \
-  -d '{
-    "intent_id": "test-001",
-    "requester_node": "client-1",
-    "signature": "sig-demo-12345678",
-    "action": "EXECUTE_WORKFLOW",
-    "parameters": {"formation": "Stenstrup-2026"}
-  }'
-
-# Replay
-curl https://YOUR_DEPLOYMENT/api/v1/replay/RCPT-...
-
-# Reproduce (secondary node simulation)
-curl -X POST https://YOUR_DEPLOYMENT/api/v1/reproduce/RCPT-...
+pip install -r requirements.txt
+uvicorn api.index:app --reload --port 8000
+# open http://localhost:8000
 ```
 
-## States
+## Deploy on Vercel
+
+1. Import this repo at https://vercel.com/new
+2. Framework: Other
+3. Deploy
+
+Or:
+
+```bash
+vercel
+```
+
+## State Ladder
 
 | State | Meaning |
 |-------|--------|
