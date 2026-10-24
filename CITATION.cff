@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: ASIN-HHC Evidence OS
+message: If you use this work, please cite it as below.
+authors:
+  - family-names: Christie
+    given-names: Dennis
+date-released: 2026-10-01
+license: MIT
+repository-code: https://github.com/dbottrader/asin-hhc-evidence-os
